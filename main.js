@@ -1,4 +1,4 @@
-async function main() {
+function main() {
     // game object containing conversation data and methods
     const game = {
         _conversationData: {
@@ -270,10 +270,10 @@ async function main() {
     // game logic
     game.greetUser(() => {
         const phraseCreator = game.createPhrase();
-        console.log(phraseCreator);
         iteration(phraseCreator);
     });
     
+    // function implementing every iteration of conversation. Takes in creator function to build phrase to act as user prompt
     function iteration(creator) {
         const readline = require('readline').createInterface({
             input: process.stdin,
@@ -281,7 +281,7 @@ async function main() {
         });
         readline.question(`${creator()} `, data => {
             readline.close();
-            if (data.toLowerCase() !== 'quit') {
+            if (data.toLowerCase() !== 'quit') { // using recursion to repeat the function while user doesn't enter 'quit' phrase
                 iteration(creator);
             };
         });
