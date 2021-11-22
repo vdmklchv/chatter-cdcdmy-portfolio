@@ -243,10 +243,28 @@ const main = () => {
                 return `${this.continuation}\n\n${this.fact}\n\n${this.question}`;
             };
         },
-        
+        // method to greet user in the beginning of the game
+        greetUser() {
+            const readline = require('readline').createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+
+            readline.question(`What's your name? `, name => {
+                const greeting = this.greeting;
+                // different behavior if greeting is a question or not
+                if (greeting.endsWith('?')) {
+                    console.log(greeting.slice(0, -1) + `, ${name}?`);
+                } else {
+                    console.log(greeting + `, ${name}.`);
+                };
+                readline.close();
+            });
+        }
     };
 
     // game logic
+    game.greetUser();
 };
 
 main();
