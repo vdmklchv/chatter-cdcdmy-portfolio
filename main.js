@@ -217,16 +217,16 @@ const main = () => {
         },
         // getters for all components, return random component
         get greeting() {
-            return this.getRandomPhrase(this._conversationData._greeting);
+            return this._conversationData._greeting;
         },
         get question() {
-            return this.getRandomPhrase(this._conversationData._question);
+            return this._conversationData._question;
         },
         get fact() {
-            return this.getRandomPhrase(this._conversationData._fact);
+            return this._conversationData._fact;
         },
         get continuation() {
-            return this.getRandomPhrase(this._conversationData._continuation);
+            return this._conversationData._continuation;
         },
         // takes in array of phrases and returns random phrase
         getRandomPhrase(phraseArray) {
@@ -236,11 +236,14 @@ const main = () => {
         createPhrase() {
             let counter = 0;
             return () => {
+                const fact = this.getRandomPhrase(this.fact);
+                const question = this.getRandomPhrase(this.question);
+                const continuation = this.getRandomPhrase(this.continuation);
                 if (counter === 0) {
                     counter++;
-                    return `${this.fact}\n\n${this.question}`;
+                    return `${fact}\n\n${question}`;
                 }
-                return `${this.continuation}\n\n${this.fact}\n\n${this.question}`;
+                return `${continuation}\n\n${fact}\n\n${question}`;
             };
         },
         // method to greet user in the beginning of the game
@@ -251,7 +254,7 @@ const main = () => {
             });
 
             readline.question(`What's your name? `, name => {
-                const greeting = this.greeting;
+                const greeting = this.getRandomPhrase(this.greeting);
                 // different behavior if greeting is a question or not
                 if (greeting.endsWith('?')) {
                     console.log(greeting.slice(0, -1) + `, ${name}?`);
@@ -264,7 +267,7 @@ const main = () => {
     };
 
     // game logic
-    game.greetUser();
+    
 };
 
 main();
