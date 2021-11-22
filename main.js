@@ -1,4 +1,4 @@
-const main = () => {
+async function main() {
     // game object containing conversation data and methods
     const game = {
         _conversationData: {
@@ -247,7 +247,7 @@ const main = () => {
             };
         },
         // method to greet user in the beginning of the game
-        greetUser() {
+        greetUser(cb) {
             const readline = require('readline').createInterface({
                 input: process.stdin,
                 output: process.stdout
@@ -262,12 +262,30 @@ const main = () => {
                     console.log(greeting + `, ${name}.`);
                 };
                 readline.close();
+                cb();
             });
         }
     };
 
     // game logic
+    game.greetUser(() => {
+        const phraseCreator = game.createPhrase();
+        console.log(phraseCreator);
+        iteration(phraseCreator);
+    });
     
+    function iteration(creator) {
+        const readline = require('readline').createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+        readline.question(`${creator()} `, data => {
+            readline.close();
+            if (data.toLowerCase() !== 'quit') {
+                iteration(creator);
+            };
+        });
+    };
 };
 
 main();
