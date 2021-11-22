@@ -241,9 +241,9 @@ function main() {
                 const continuation = this.getRandomPhrase(this.continuation);
                 if (counter === 0) {
                     counter++;
-                    return `${fact}\n\n${question}`;
+                    return `Did you know?\n${fact}\n\n${question}\n\nYour answer: `;
                 }
-                return `${continuation}\n\n${fact}\n\n${question}`;
+                return `${continuation}\n\n${fact}\n\n${question}\n\nYour answer: `;
             };
         },
         // method to greet user in the beginning of the game
@@ -256,11 +256,13 @@ function main() {
             readline.question(`What's your name? `, name => {
                 const greeting = this.getRandomPhrase(this.greeting);
                 // different behavior if greeting is a question or not
+                console.log('\n');
                 if (greeting.endsWith('?')) {
                     console.log(greeting.slice(0, -1) + `, ${name}?`);
                 } else {
                     console.log(greeting + `, ${name}.`);
                 };
+                console.log("=============================\n");
                 readline.close();
                 cb();
             });
@@ -280,6 +282,7 @@ function main() {
             output: process.stdout
         });
         readline.question(`${creator()} `, data => {
+            console.log('\n');
             readline.close();
             if (data.toLowerCase() !== 'quit') { // using recursion to repeat the function while user doesn't enter 'quit' phrase
                 iteration(creator);
