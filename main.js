@@ -3,11 +3,11 @@ const main = () => {
     const game = {
         _conversationData: {
             _greeting: [
-                    'Hello', 'Hi', 'hey', 'good morning', 'it\'s nice to meet you',
-                    'It\'s a pleasure to meet you', 'it\'s good to see you again', 'what\'s up', 'sup', 'how\'s it going?', 'how are you?', 'how have you been?', 'what\'s new'
+                    'Hello', 'Hi', 'Hey', 'Good morning', 'It\'s nice to meet you',
+                    'It\'s a pleasure to meet you', 'It\'s good to see you again', 'what\'s up', 'Sup?', 'How\'s it going?', 'How are you?', 'How have you been?', 'What\'s new?'
             ],
             _continuation: [
-                'That is cool!', 'Thanks for sharing', 'sounds good', 'really love it', 'nice to hear it', 'what a wonderful thing you\'ve told me', 'how astonishing', 'Oh really?', 'well, it is none of my buisiness I guess', 'wow, i like it', 'how good of you', 
+                'That is cool!', 'Thanks for sharing', 'Sounds good', 'Really love it', 'Nice to hear it', 'What a wonderful thing you\'ve told me', 'How astonishing', 'Oh really?', 'Well, it is none of my buisiness I guess', 'Wow, i like it', 'How good of you', 
             ],
             _fact: [
                 "Three presidents, all Founding Fathers—John Adams, Thomas Jefferson, and James Monroe—died on July 4. Presidents Adams and Jefferson also died the same year, 1826; President Monroe died in 1831. Coincidence? You decide. (constitutioncenter.org)",
@@ -228,11 +228,21 @@ const main = () => {
         get continuation() {
             return this.getRandomPhrase(this._conversationData._continuation);
         },
-
         // takes in array of phrases and returns random phrase
         getRandomPhrase(phraseArray) {
             return phraseArray[Math.floor(Math.random() * phraseArray.length)];
-        }
+        },
+        // this method combines random phrases in a correct way depending on situation
+        createPhrase() {
+            let counter = 0;
+            return () => {
+                if (counter === 0) {
+                    counter++;
+                    return `${this.fact}\n\n${this.question}`;
+                }
+                return `${this.continuation}\n\n${this.fact}\n\n${this.question}`;
+            };
+        },
         
     };
 
