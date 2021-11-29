@@ -249,8 +249,10 @@ function main() {
         // method to greet user in the beginning of the game
         greetUser(cb) {
             const readline = require('readline').createInterface({
+                /* eslint-disable no-undef */
                 input: process.stdin,
                 output: process.stdout
+                /* eslint-enable no-undef */
             });
 
             readline.question(`What's your name? `, name => {
@@ -261,7 +263,7 @@ function main() {
                     console.log(greeting.slice(0, -1) + `, ${name}?`);
                 } else {
                     console.log(greeting + `, ${name}.`);
-                };
+                }
                 console.log("=============================\n");
                 readline.close();
                 cb();
@@ -278,18 +280,20 @@ function main() {
     // function implementing every iteration of conversation. Takes in creator function to build phrase to act as user prompt
     function iteration(creator) {
         const readline = require('readline').createInterface({
+            /* eslint-disable no-undef */
             input: process.stdin,
             output: process.stdout
+            /* eslint-enable no-undef */
         });
         readline.question(`${creator()} `, data => {
             console.log('\n');
             readline.close();
             if (data.toLowerCase() !== 'quit') { // using recursion to repeat the function while user doesn't enter 'quit' phrase
                 iteration(creator);
-            };
+            }
         });
-    };
-};
+    }
+}
 
 main();
 
