@@ -1,0 +1,23 @@
+{
+  "name": "chatter-cdcdmy-portfolio",
+  "version": "1.0.0",
+  "description": "Simple chatter project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdmklchv/chatter-cdcdmy-portfolio.git"
+  },
+  "author": "Vadim Colcev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vdmklchv/chatter-cdcdmy-portfolio/issues"
+  },
+  "homepage": "https://github.com/vdmklchv/chatter-cdcdmy-portfolio#readme",
+  "devDependencies": {
+    "eslint": "^8.3.0"
+  }
+}
